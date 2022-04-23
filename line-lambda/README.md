@@ -2,6 +2,8 @@
 
 https://zenn.dev/ufoo68/books/3fbd1969bd4b21c5454b
 
+情報が古くて lambda あたりの実装が詰まったので廃止。
+
 # Welcome to your CDK TypeScript project
 
 This is a blank project for TypeScript development with CDK.
