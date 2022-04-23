@@ -1,5 +1,6 @@
 import * as cdk from 'aws-cdk-lib'
 import * as lambda from 'aws-cdk-lib/aws-lambda'
+import * as apigw from 'aws-cdk-lib/aws-apigateway'
 
 export class WorkshopStack extends cdk.Stack {
   constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
@@ -10,6 +11,11 @@ export class WorkshopStack extends cdk.Stack {
       runtime: lambda.Runtime.NODEJS_14_X, // execution environment
       code: lambda.Code.fromAsset('lambda'), // code loaded from "lambda" directory
       handler: 'hello.handler', // file is "hello" , function is "handler"
+    })
+
+    // defines an API Gateway REST API resource backed by our "hello" function.
+    new apigw.LambdaRestApi(this, 'Endpoint', {
+      handler: hello,
     })
 
     // nothing here!
