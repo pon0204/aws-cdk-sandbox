@@ -17,7 +17,7 @@ export class PracticeEc2Stack extends Stack {
         {
           cidrMask: 24,
           name: 'asterisk',
-          subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+          subnetType: ec2.SubnetType.PUBLIC,
         },
       ],
     })
@@ -31,7 +31,7 @@ export class PracticeEc2Stack extends Stack {
     securityGroup.addIngressRule(
       ec2.Peer.anyIpv4(),
       ec2.Port.tcp(22),
-      'Allow SSH Acesss'
+      'Allow SSH Access'
     )
 
     const role = new iam.Role(this, 'ec2Role', {
@@ -75,7 +75,7 @@ export class PracticeEc2Stack extends Stack {
     })
     asset.grantRead(ec2Instance.role)
 
-    // Create outputs for connecting
+    // // Create outputs for connecting
     new CfnOutput(this, 'IP Address', { value: ec2Instance.instancePublicIp })
     // new cdk.CfnOutput(this, 'Key Name', { value: key.keyPairName })
     new CfnOutput(this, 'Download Key Command', {
